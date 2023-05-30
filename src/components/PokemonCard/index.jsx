@@ -10,7 +10,7 @@ export default function PokemonCard({id, name, image}) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
-        sx={{ height: 200 }}
+        sx={{ height: 200, backgroundSize: 'contain' }}
         image={image}
         title={name}
       />
@@ -18,7 +18,7 @@ export default function PokemonCard({id, name, image}) {
       <Typography variant="body2" color="text.secondary">
         Nº: {id}
         </Typography>
-        <Typography gutterBottom variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
+        <Typography gutterBottom fontSize="1rem" component="div" sx={{ fontWeight: 'bold' }}>
           {name.toUpperCase()}
         </Typography>
         {/* <Typography variant="body2" color="text.secondary">

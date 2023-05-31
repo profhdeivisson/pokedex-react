@@ -59,7 +59,7 @@ export default function Navbar() {
             justifyContent="space-between"
             width="100%"
           >
-            <Box component="img" src='./public/assets/logo-pokedex.png' height="3em"></Box>
+            <Box component="img" src='/assets/logo-pokedex.png' height="3em"></Box>
           </Box>
           <Search>
             <SearchIconWrapper>

@@ -20,10 +20,24 @@ export const Home = () => {
         return response;
         // axios.get("https://pokeapi.co/api/v2/pokemon?limit=50").then((response) => setPokemons(response.data.results)).catch((error) => console.error(error));
     }
+
+    const pokemonFilter = (name) => {
+        var filteredPokemons = []
+        if(!name){
+            getPokemons()
+        }
+        for(var i in pokemons){
+            if(pokemons[i].data.name.includes(name)){
+                filteredPokemons.push(pokemons[i])
+            }
+        }
+        // console.log(filteredPokemons)
+        setPokemons(filteredPokemons)
+    }
     
     return(
         <div>
-            <Navbar />
+            <Navbar pokemonFilter={pokemonFilter}/>
             <Container maxWidth="false">
                 <Grid container spacing={1}>
                 {pokemons.map((pokemon, key) => {

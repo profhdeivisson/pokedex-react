@@ -5,8 +5,15 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function PokemonCard({id, name, image, types}) {
+  const [likes, setLikes] = React.useState(0);
+
+  const handleLike = () => {
+    setLikes(likes + 1);
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -23,10 +30,14 @@ export default function PokemonCard({id, name, image, types}) {
         </Typography>
         <Typography variant="body2" color="text.secondary">{types}</Typography>
       </CardContent>
-      {/* <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions> */}
+      <CardActions>
+        <IconButton onClick={handleLike}>
+          <FavoriteIcon />
+        </IconButton>
+        <Typography variant="body2" color="text.secondary">
+          {likes} curtida(s)
+        </Typography>
+      </CardActions>
     </Card>
   );
 }

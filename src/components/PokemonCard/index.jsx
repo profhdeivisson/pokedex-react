@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function PokemonCard({id, name, image}) {
+export default function PokemonCard({id, name, image, types}) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -21,10 +21,7 @@ export default function PokemonCard({id, name, image}) {
         <Typography gutterBottom fontSize="1rem" component="div" sx={{ fontWeight: 'bold' }}>
           {name.toUpperCase()}
         </Typography>
-        {/* <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography> */}
+        <Typography variant="body2" color="text.secondary">{types}</Typography>
       </CardContent>
       {/* <CardActions>
         <Button size="small">Share</Button>

@@ -8,7 +8,7 @@ import CustomButton from '../components/CustomButton';
 export const Home = () => {
   const [pokemons, setPokemons] = useState([]);
   const [filteredPokemons, setFilteredPokemons] = useState([]);
-  const [loadedPokemons, setLoadedPokemons] = useState(50);
+  const [loadedPokemons, setLoadedPokemons] = useState(100);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ export const Home = () => {
       .get(`https://pokeapi.co/api/v2/pokemon?limit=${loadedPokemons}`)
       .then(response => {
         const pokemonEndpoints = response.data.results.map(pokemon => pokemon.url);
+        console.log(pokemonEndpoints)
         axios.all(pokemonEndpoints.map(endpoint => axios.get(endpoint)))
           .then(response => {
             setPokemons(response);
@@ -51,7 +52,7 @@ export const Home = () => {
   };
 
   const loadMorePokemons = () => {
-    setLoadedPokemons(prevLoadedPokemons => prevLoadedPokemons + 10);
+    setLoadedPokemons(prevLoadedPokemons => prevLoadedPokemons + 20);
   };
 
   useEffect(() => {
@@ -65,7 +66,22 @@ export const Home = () => {
         <Grid container spacing={1}>
           {filteredPokemons.map((pokemon, key) => (
             <Grid item xs={6} sm={3} md={2} key={key}>
-              <PokemonCard id={pokemon.data.id} name={pokemon.data.name} image={pokemon.data.sprites.front_default} />
+              <PokemonCard id={pokemon.data.id} name={pokemon.data.name} image={pokemon.data.sprites.front_default} types={pokemon.data.types.map((type) => (
+            <span
+              key={type.type.name}
+              style={{
+                marginRight: '0.5rem',
+                padding: '0.25rem 0.5rem',
+                borderRadius: '4px',
+                textTransform: 'uppercase',
+                color: '#fff',
+                fontWeight: 'bold',
+                backgroundColor: getTypeColor(type.type.name),
+              }}
+            >
+              {type.type.name}
+            </span>
+          ))}/>
             </Grid>
           ))}
         </Grid>
@@ -77,4 +93,46 @@ export const Home = () => {
       </Container>
     </div>
   );
+};
+const getTypeColor = (type) => {
+  switch (type.toLowerCase()) {
+    case 'normal':
+      return 'gray';
+    case 'fire':
+      return 'orangered';
+    case 'fighting':
+      return 'red';
+    case 'water':
+      return '#6890F0';
+    case 'flying':
+      return 'skyblue';
+    case 'grass':
+      return 'green';
+    case 'poison':
+      return 'purple';
+    case 'electric':
+      return 'goldenrod';
+    case 'ground':
+      return 'brown';
+    case 'psychic':
+      return 'deeppink';
+    case 'rock':
+      return 'dimgray';
+    case 'ice':
+      return 'lightblue';
+    case 'bug':
+      return 'green';
+    case 'dragon':
+      return 'indigo';
+    case 'ghost':
+      return '#705898';
+    case 'dark':
+      return 'black';
+    case 'steel':
+      return 'gray';
+    case 'fairy':
+      return 'hotpink';
+    default:
+      return 'black';
+  }
 };

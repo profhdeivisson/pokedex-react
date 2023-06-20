@@ -1,3 +1,3 @@
 # pokedex-react
 Deploy: https://pokedex-react-profhdeivisson.vercel.app
-<img src="mockup.png" width="200" />
+<br><img src="mockup.png" />
